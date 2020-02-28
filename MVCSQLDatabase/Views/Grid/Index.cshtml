@@ -1,0 +1,72 @@
+﻿
+@(Html.Kendo().Grid<MVCSQLDatabase.Models.Proposal>()
+      .Name("Grid")
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(10)
+          .Batch(true)
+          .Model(model => model.Id(p => p.Proposal_Uid))
+          .Read(read => read.Action("Proposals_Read", "Grid"))
+          .Create(create => create.Action("Proposals_Create", "Grid"))
+          .Update(update => update.Action("Proposals_Update", "Grid"))
+          .Destroy(destroy => destroy.Action("Proposals_Destroy", "Grid"))
+      )
+          .Resizable(resize => resize.Columns(true))
+
+      .Columns(columns =>
+      {
+          columns.Select().Width(300);
+          columns.Bound(c => c.Prime_Contract).Width(215);
+          columns.Bound(c => c.Proposal_Title).Width(200);
+          columns.Bound(c => c.Client_Name).Width(190);
+          columns.Bound(c => c.Client_Code).Width(185);
+          columns.Bound(c => c.Total_Proposal_Amount).Width(290);
+          columns.Bound(c => c.Manager_Name).Width(220);
+          columns.Bound(c => c.Start_Date).Format("{0: dd/MM/yyyy}").Width(170);
+          columns.Bound(c => c.End_Date).Format("{0: dd/MM/yyyy}").Width(170);
+          columns.Bound(c => c.Proposal_Number).Width(235);
+          columns.Bound(c => c.Contract_Type).Width(215);
+      })
+      .ToolBar(toolbar =>
+      {
+          toolbar.Create();
+          toolbar.Pdf();
+          toolbar.Save();
+          toolbar.Excel();
+          toolbar.Custom().Text("Delete").Name("Destroy").IconClass("k-icon k-i-close");
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InCell).DisplayDeleteConfirmation(false))
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.InCell))
+      .Pageable()
+      .PersistSelection()
+      .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
+      .Scrollable()
+      .HtmlAttributes(new { style = "height:835px;" })
+
+)
+
+    <script>
+        $(document).ready(function ()
+        {
+            $(".k-grid-Destroy").on("click", function (e)
+            {
+                e.preventDefault();
+                var grid = $("#Grid").data("kendoGrid");
+                var selectedRows = grid.select();
+                kendo.confirm(kendo.format("Are you sure you wish to delete {0} records?", selectedRows.length))
+                    .done(function ()
+                    {
+                        $.each(selectedRows, function (i, row)
+                        {
+                            grid.removeRow(row);
+                        })
+                        grid.saveChanges();
+                    });
+            });
+        });
+    </script>
+
+
+
+

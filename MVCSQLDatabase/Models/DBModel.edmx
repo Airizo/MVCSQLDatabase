@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PromotionalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Proposals">
+          <Key>
+            <PropertyRef Name="Proposal_Uid" />
+          </Key>
+          <Property Name="Proposal_Uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prime_Contract" Type="nvarchar" MaxLength="32" />
+          <Property Name="Proposal_Title" Type="nvarchar" MaxLength="40" />
+          <Property Name="Client_Name" Type="nvarchar" MaxLength="40" />
+          <Property Name="Client_Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Total_Proposal_Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Manager_Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="Start_Date" Type="date" />
+          <Property Name="End_Date" Type="date" />
+          <Property Name="Proposal_Number" Type="nvarchar" MaxLength="20" />
+          <Property Name="Contract_Type" Type="nvarchar" MaxLength="16" />
+        </EntityType>
+        <Function Name="crud_Proposal_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ppsl">
+          <Parameter Name="Proposal_Uid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="crud_Proposal_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ppsl" />
+        <Function Name="crud_Proposal_Update_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ppsl">
+          <Parameter Name="Proposal_Uid" Type="int" Mode="In" />
+          <Parameter Name="Prime_Contract" Type="nvarchar" Mode="In" />
+          <Parameter Name="Proposal_Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="Client_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Client_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="Total_Proposal_Amount" Type="decimal" Mode="In" />
+          <Parameter Name="Manager_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Start_Date" Type="date" Mode="In" />
+          <Parameter Name="End_Date" Type="date" Mode="In" />
+          <Parameter Name="Proposal_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contract_Type" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="PromotionalModelStoreContainer">
+          <EntitySet Name="Proposals" EntityType="Self.Proposals" Schema="ppsl" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PromotionalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Proposal">
+          <Key>
+            <PropertyRef Name="Proposal_Uid" />
+          </Key>
+          <Property Name="Proposal_Uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prime_Contract" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Proposal_Title" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Client_Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Client_Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Total_Proposal_Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Manager_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Start_Date" Type="DateTime" Precision="0" />
+          <Property Name="End_Date" Type="DateTime" Precision="0" />
+          <Property Name="Proposal_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Contract_Type" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DBModels" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Proposals" EntityType="Self.Proposal" />
+          <FunctionImport Name="crud_Proposal_Delete">
+            <Parameter Name="Proposal_Uid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="crud_Proposal_Select" ReturnType="Collection(PromotionalModel.crud_Proposal_Select_Result)" />
+          <FunctionImport Name="crud_Proposal_Update_Insert">
+            <Parameter Name="Proposal_Uid" Mode="In" Type="Int32" />
+            <Parameter Name="Prime_Contract" Mode="In" Type="String" />
+            <Parameter Name="Proposal_Title" Mode="In" Type="String" />
+            <Parameter Name="Client_Name" Mode="In" Type="String" />
+            <Parameter Name="Client_Code" Mode="In" Type="String" />
+            <Parameter Name="Total_Proposal_Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="Manager_Name" Mode="In" Type="String" />
+            <Parameter Name="Start_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="End_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Proposal_Number" Mode="In" Type="String" />
+            <Parameter Name="Contract_Type" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="crud_Proposal_Select_Result">
+          <Property Type="Int32" Name="Proposal_Uid" Nullable="false" />
+          <Property Type="String" Name="Prime_Contract" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Proposal_Title" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Client_Name" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Client_Code" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="Total_Proposal_Amount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Manager_Name" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="Start_Date" Nullable="true" />
+          <Property Type="DateTime" Name="End_Date" Nullable="true" />
+          <Property Type="String" Name="Proposal_Number" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Contract_Type" Nullable="true" MaxLength="16" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PromotionalModelStoreContainer" CdmEntityContainer="DBModels">
+          <EntitySetMapping Name="Proposals">
+            <EntityTypeMapping TypeName="PromotionalModel.Proposal">
+              <MappingFragment StoreEntitySet="Proposals">
+                <ScalarProperty Name="Proposal_Uid" ColumnName="Proposal_Uid" />
+                <ScalarProperty Name="Prime_Contract" ColumnName="Prime_Contract" />
+                <ScalarProperty Name="Proposal_Title" ColumnName="Proposal_Title" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+                <ScalarProperty Name="Client_Code" ColumnName="Client_Code" />
+                <ScalarProperty Name="Total_Proposal_Amount" ColumnName="Total_Proposal_Amount" />
+                <ScalarProperty Name="Manager_Name" ColumnName="Manager_Name" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Proposal_Number" ColumnName="Proposal_Number" />
+                <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="crud_Proposal_Delete" FunctionName="PromotionalModel.Store.crud_Proposal_Delete" />
+          <FunctionImportMapping FunctionImportName="crud_Proposal_Select" FunctionName="PromotionalModel.Store.crud_Proposal_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PromotionalModel.crud_Proposal_Select_Result">
+                <ScalarProperty Name="Proposal_Uid" ColumnName="Proposal_Uid" />
+                <ScalarProperty Name="Prime_Contract" ColumnName="Prime_Contract" />
+                <ScalarProperty Name="Proposal_Title" ColumnName="Proposal_Title" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+                <ScalarProperty Name="Client_Code" ColumnName="Client_Code" />
+                <ScalarProperty Name="Total_Proposal_Amount" ColumnName="Total_Proposal_Amount" />
+                <ScalarProperty Name="Manager_Name" ColumnName="Manager_Name" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Proposal_Number" ColumnName="Proposal_Number" />
+                <ScalarProperty Name="Contract_Type" ColumnName="Contract_Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="crud_Proposal_Update_Insert" FunctionName="PromotionalModel.Store.crud_Proposal_Update_Insert" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
